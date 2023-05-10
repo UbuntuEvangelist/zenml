@@ -52,7 +52,7 @@ from zenml.materializers.base_materializer import BaseMaterializer
 from zenml.materializers.materializer_registry import materializer_registry
 from zenml.steps.base_parameters import BaseParameters
 from zenml.steps.step_context import StepContext
-from zenml.steps.utils import (
+from zenml.steps.step_decorator import (
     INSTANCE_CONFIGURATION,
     PARAM_CREATED_BY_FUNCTIONAL_API,
     PARAM_ENABLE_ARTIFACT_METADATA,
@@ -66,6 +66,8 @@ from zenml.steps.utils import (
     PARAM_SETTINGS,
     PARAM_STEP_NAME,
     PARAM_STEP_OPERATOR,
+)
+from zenml.steps.utils import (
     parse_return_type_annotations,
     resolve_type_annotation,
 )

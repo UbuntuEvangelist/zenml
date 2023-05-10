@@ -19,25 +19,10 @@ import typing
 from typing import Any, Dict
 
 from zenml.logger import get_logger
+from zenml.steps.step_decorator import SINGLE_RETURN_OUT_NAME
 from zenml.steps.step_output import Output
 
 logger = get_logger(__name__)
-
-STEP_INNER_FUNC_NAME = "entrypoint"
-SINGLE_RETURN_OUT_NAME = "output"
-PARAM_STEP_NAME = "name"
-PARAM_ENABLE_CACHE = "enable_cache"
-PARAM_ENABLE_ARTIFACT_METADATA = "enable_artifact_metadata"
-PARAM_ENABLE_ARTIFACT_VISUALIZATION = "enable_artifact_visualization"
-PARAM_CREATED_BY_FUNCTIONAL_API = "created_by_functional_api"
-PARAM_STEP_OPERATOR = "step_operator"
-PARAM_EXPERIMENT_TRACKER = "experiment_tracker"
-INSTANCE_CONFIGURATION = "INSTANCE_CONFIGURATION"
-PARAM_OUTPUT_MATERIALIZERS = "output_materializers"
-PARAM_SETTINGS = "settings"
-PARAM_EXTRA_OPTIONS = "extra"
-PARAM_ON_FAILURE = "on_failure"
-PARAM_ON_SUCCESS = "on_success"
 
 
 def resolve_type_annotation(obj: Any) -> Any:

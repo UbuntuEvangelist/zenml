@@ -13,7 +13,6 @@
 #  permissions and limitations under the License.
 """Step decorator function."""
 
-from types import FunctionType
 from typing import (
     TYPE_CHECKING,
     Any,
@@ -27,40 +26,42 @@ from typing import (
     overload,
 )
 
-from zenml.steps import BaseStep
-from zenml.steps.utils import (
-    INSTANCE_CONFIGURATION,
-    PARAM_CREATED_BY_FUNCTIONAL_API,
-    PARAM_ENABLE_ARTIFACT_METADATA,
-    PARAM_ENABLE_ARTIFACT_VISUALIZATION,
-    PARAM_ENABLE_CACHE,
-    PARAM_EXPERIMENT_TRACKER,
-    PARAM_EXTRA_OPTIONS,
-    PARAM_ON_FAILURE,
-    PARAM_ON_SUCCESS,
-    PARAM_OUTPUT_MATERIALIZERS,
-    PARAM_SETTINGS,
-    PARAM_STEP_NAME,
-    PARAM_STEP_OPERATOR,
-    STEP_INNER_FUNC_NAME,
-)
-
 if TYPE_CHECKING:
+    from types import FunctionType
+
     from zenml.config.base_settings import SettingsOrDict
     from zenml.config.source import Source
     from zenml.materializers.base_materializer import BaseMaterializer
+    from zenml.steps.base_step import BaseStep
 
-    MaterializerClassOrSource = Union[str, "Source", Type["BaseMaterializer"]]
-    HookSpecification = Union[str, "Source", FunctionType]
+    MaterializerClassOrSource = Union[str, Source, Type[BaseMaterializer]]
+    HookSpecification = Union[str, Source, FunctionType]
     OutputMaterializersSpecification = Union[
-        "MaterializerClassOrSource", Mapping[str, "MaterializerClassOrSource"]
+        MaterializerClassOrSource, Mapping[str, MaterializerClassOrSource]
     ]
 
-F = TypeVar("F", bound=Callable[..., Any])
+    F = TypeVar("F", bound=Callable[..., Any])
+
+
+STEP_INNER_FUNC_NAME = "entrypoint"
+SINGLE_RETURN_OUT_NAME = "output"
+PARAM_STEP_NAME = "name"
+PARAM_ENABLE_CACHE = "enable_cache"
+PARAM_ENABLE_ARTIFACT_METADATA = "enable_artifact_metadata"
+PARAM_ENABLE_ARTIFACT_VISUALIZATION = "enable_artifact_visualization"
+PARAM_CREATED_BY_FUNCTIONAL_API = "created_by_functional_api"
+PARAM_STEP_OPERATOR = "step_operator"
+PARAM_EXPERIMENT_TRACKER = "experiment_tracker"
+INSTANCE_CONFIGURATION = "INSTANCE_CONFIGURATION"
+PARAM_OUTPUT_MATERIALIZERS = "output_materializers"
+PARAM_SETTINGS = "settings"
+PARAM_EXTRA_OPTIONS = "extra"
+PARAM_ON_FAILURE = "on_failure"
+PARAM_ON_SUCCESS = "on_success"
 
 
 @overload
-def step(_func: F) -> Type[BaseStep]:
+def step(_func: "F") -> Type["BaseStep"]:
     ...
 
 
@@ -78,12 +79,12 @@ def step(
     extra: Optional[Dict[str, Any]] = None,
     on_failure: Optional["HookSpecification"] = None,
     on_success: Optional["HookSpecification"] = None,
-) -> Callable[[F], Type[BaseStep]]:
+) -> Callable[["F"], Type["BaseStep"]]:
     ...
 
 
 def step(
-    _func: Optional[F] = None,
+    _func: Optional["F"] = None,
     *,
     name: Optional[str] = None,
     enable_cache: Optional[bool] = None,
@@ -96,7 +97,7 @@ def step(
     extra: Optional[Dict[str, Any]] = None,
     on_failure: Optional["HookSpecification"] = None,
     on_success: Optional["HookSpecification"] = None,
-) -> Union[Type[BaseStep], Callable[[F], Type[BaseStep]]]:
+) -> Union[Type["BaseStep"], Callable[["F"], Type["BaseStep"]]]:
     """Outer decorator function for the creation of a ZenML step.
 
     In order to be able to work with parameters such as `name`, it features a
@@ -138,7 +139,7 @@ def step(
         ZenML BaseStep
     """
 
-    def inner_decorator(func: F) -> Type[BaseStep]:
+    def inner_decorator(func: "F") -> Type["BaseStep"]:
         """Inner decorator function for the creation of a ZenML Step.
 
         Args:
@@ -148,6 +149,8 @@ def step(
         Returns:
             The class of a newly generated ZenML Step.
         """
+        from zenml.steps.base_step import BaseStep
+
         return type(  # noqa
             func.__name__,
             (BaseStep,),
