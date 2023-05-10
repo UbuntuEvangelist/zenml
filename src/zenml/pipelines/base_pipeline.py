@@ -40,6 +40,17 @@ import yaml
 from packaging import version
 
 from zenml import constants
+from zenml.api.pipeline_decorator import (
+    INSTANCE_CONFIGURATION,
+    PARAM_ENABLE_ARTIFACT_METADATA,
+    PARAM_ENABLE_ARTIFACT_VISUALIZATION,
+    PARAM_ENABLE_CACHE,
+    PARAM_EXTRA_OPTIONS,
+    PARAM_ON_FAILURE,
+    PARAM_ON_SUCCESS,
+    PARAM_SETTINGS,
+    PIPELINE_INNER_FUNC_NAME,
+)
 from zenml.client import Client
 from zenml.config.compiler import Compiler
 from zenml.config.pipeline_configurations import (
@@ -68,17 +79,6 @@ from zenml.models.pipeline_build_models import (
 )
 from zenml.models.pipeline_deployment_models import PipelineDeploymentBaseModel
 from zenml.pipelines import build_utils
-from zenml.pipelines.pipeline_decorator import (
-    INSTANCE_CONFIGURATION,
-    PARAM_ENABLE_ARTIFACT_METADATA,
-    PARAM_ENABLE_ARTIFACT_VISUALIZATION,
-    PARAM_ENABLE_CACHE,
-    PARAM_EXTRA_OPTIONS,
-    PARAM_ON_FAILURE,
-    PARAM_ON_SUCCESS,
-    PARAM_SETTINGS,
-    PIPELINE_INNER_FUNC_NAME,
-)
 from zenml.stack import Stack
 from zenml.steps import BaseStep
 from zenml.steps.base_step import BaseStepMeta
@@ -105,7 +105,7 @@ if TYPE_CHECKING:
     StepConfigurationUpdateOrDict = Union[
         Dict[str, Any], StepConfigurationUpdate
     ]
-    HookSpecification = Union[str, "Source", FunctionType]
+    HookSpecification = Union[str, Source, FunctionType]
 
 logger = get_logger(__name__)
 

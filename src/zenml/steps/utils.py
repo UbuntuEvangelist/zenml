@@ -18,8 +18,8 @@ import sys
 import typing
 from typing import Any, Dict
 
+from zenml.api.step_decorator import SINGLE_RETURN_OUT_NAME
 from zenml.logger import get_logger
-from zenml.steps.step_decorator import SINGLE_RETURN_OUT_NAME
 from zenml.steps.step_output import Output
 
 logger = get_logger(__name__)

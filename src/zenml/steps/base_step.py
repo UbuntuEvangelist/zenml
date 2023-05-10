@@ -36,6 +36,21 @@ from typing import (
 
 from pydantic import ValidationError
 
+from zenml.api.step_decorator import (
+    INSTANCE_CONFIGURATION,
+    PARAM_CREATED_BY_FUNCTIONAL_API,
+    PARAM_ENABLE_ARTIFACT_METADATA,
+    PARAM_ENABLE_ARTIFACT_VISUALIZATION,
+    PARAM_ENABLE_CACHE,
+    PARAM_EXPERIMENT_TRACKER,
+    PARAM_EXTRA_OPTIONS,
+    PARAM_ON_FAILURE,
+    PARAM_ON_SUCCESS,
+    PARAM_OUTPUT_MATERIALIZERS,
+    PARAM_SETTINGS,
+    PARAM_STEP_NAME,
+    PARAM_STEP_OPERATOR,
+)
 from zenml.config.source import Source
 from zenml.config.step_configurations import (
     ArtifactConfiguration,
@@ -52,21 +67,6 @@ from zenml.materializers.base_materializer import BaseMaterializer
 from zenml.materializers.materializer_registry import materializer_registry
 from zenml.steps.base_parameters import BaseParameters
 from zenml.steps.step_context import StepContext
-from zenml.steps.step_decorator import (
-    INSTANCE_CONFIGURATION,
-    PARAM_CREATED_BY_FUNCTIONAL_API,
-    PARAM_ENABLE_ARTIFACT_METADATA,
-    PARAM_ENABLE_ARTIFACT_VISUALIZATION,
-    PARAM_ENABLE_CACHE,
-    PARAM_EXPERIMENT_TRACKER,
-    PARAM_EXTRA_OPTIONS,
-    PARAM_ON_FAILURE,
-    PARAM_ON_SUCCESS,
-    PARAM_OUTPUT_MATERIALIZERS,
-    PARAM_SETTINGS,
-    PARAM_STEP_NAME,
-    PARAM_STEP_OPERATOR,
-)
 from zenml.steps.utils import (
     parse_return_type_annotations,
     resolve_type_annotation,
