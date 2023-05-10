@@ -68,6 +68,17 @@ from zenml.models.pipeline_build_models import (
 )
 from zenml.models.pipeline_deployment_models import PipelineDeploymentBaseModel
 from zenml.pipelines import build_utils
+from zenml.pipelines.pipeline_decorator import (
+    INSTANCE_CONFIGURATION,
+    PARAM_ENABLE_ARTIFACT_METADATA,
+    PARAM_ENABLE_ARTIFACT_VISUALIZATION,
+    PARAM_ENABLE_CACHE,
+    PARAM_EXTRA_OPTIONS,
+    PARAM_ON_FAILURE,
+    PARAM_ON_SUCCESS,
+    PARAM_SETTINGS,
+    PIPELINE_INNER_FUNC_NAME,
+)
 from zenml.stack import Stack
 from zenml.steps import BaseStep
 from zenml.steps.base_step import BaseStepMeta
@@ -97,15 +108,6 @@ if TYPE_CHECKING:
     HookSpecification = Union[str, "Source", FunctionType]
 
 logger = get_logger(__name__)
-PIPELINE_INNER_FUNC_NAME = "connect"
-PARAM_ENABLE_CACHE = "enable_cache"
-PARAM_ENABLE_ARTIFACT_METADATA = "enable_artifact_metadata"
-PARAM_ENABLE_ARTIFACT_VISUALIZATION = "enable_artifact_visualization"
-INSTANCE_CONFIGURATION = "INSTANCE_CONFIGURATION"
-PARAM_SETTINGS = "settings"
-PARAM_EXTRA_OPTIONS = "extra"
-PARAM_ON_FAILURE = "on_failure"
-PARAM_ON_SUCCESS = "on_success"
 
 
 class BasePipelineMeta(type):

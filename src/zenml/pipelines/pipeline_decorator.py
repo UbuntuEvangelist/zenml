@@ -13,7 +13,6 @@
 #  permissions and limitations under the License.
 """Decorator function for ZenML pipelines."""
 
-from types import FunctionType
 from typing import (
     TYPE_CHECKING,
     Any,
@@ -26,30 +25,31 @@ from typing import (
     overload,
 )
 
-from zenml.pipelines.base_pipeline import (
-    INSTANCE_CONFIGURATION,
-    PARAM_ENABLE_ARTIFACT_METADATA,
-    PARAM_ENABLE_ARTIFACT_VISUALIZATION,
-    PARAM_ENABLE_CACHE,
-    PARAM_EXTRA_OPTIONS,
-    PARAM_ON_FAILURE,
-    PARAM_ON_SUCCESS,
-    PARAM_SETTINGS,
-    PIPELINE_INNER_FUNC_NAME,
-    BasePipeline,
-)
-
 if TYPE_CHECKING:
+    from types import FunctionType
+
     from zenml.config.base_settings import SettingsOrDict
     from zenml.config.source import Source
+    from zenml.pipelines.base_pipeline import BasePipeline
 
-    HookSpecification = Union[str, "Source", FunctionType]
+    HookSpecification = Union[str, Source, FunctionType]
 
-F = TypeVar("F", bound=Callable[..., None])
+    F = TypeVar("F", bound=Callable[..., None])
+
+
+PIPELINE_INNER_FUNC_NAME = "connect"
+PARAM_ENABLE_CACHE = "enable_cache"
+PARAM_ENABLE_ARTIFACT_METADATA = "enable_artifact_metadata"
+PARAM_ENABLE_ARTIFACT_VISUALIZATION = "enable_artifact_visualization"
+INSTANCE_CONFIGURATION = "INSTANCE_CONFIGURATION"
+PARAM_SETTINGS = "settings"
+PARAM_EXTRA_OPTIONS = "extra"
+PARAM_ON_FAILURE = "on_failure"
+PARAM_ON_SUCCESS = "on_success"
 
 
 @overload
-def pipeline(_func: F) -> Type[BasePipeline]:
+def pipeline(_func: "F") -> Type["BasePipeline"]:
     ...
 
 
@@ -62,12 +62,12 @@ def pipeline(
     enable_artifact_visualization: Optional[bool] = None,
     settings: Optional[Dict[str, "SettingsOrDict"]] = None,
     extra: Optional[Dict[str, Any]] = None,
-) -> Callable[[F], Type[BasePipeline]]:
+) -> Callable[["F"], Type["BasePipeline"]]:
     ...
 
 
 def pipeline(
-    _func: Optional[F] = None,
+    _func: Optional["F"] = None,
     *,
     name: Optional[str] = None,
     enable_cache: Optional[bool] = None,
@@ -77,7 +77,7 @@ def pipeline(
     extra: Optional[Dict[str, Any]] = None,
     on_failure: Optional["HookSpecification"] = None,
     on_success: Optional["HookSpecification"] = None,
-) -> Union[Type[BasePipeline], Callable[[F], Type[BasePipeline]]]:
+) -> Union[Type["BasePipeline"], Callable[["F"], Type["BasePipeline"]]]:
     """Outer decorator function for the creation of a ZenML pipeline.
 
     In order to be able to work with parameters such as "name", it features a
@@ -107,7 +107,7 @@ def pipeline(
         ZenML BasePipeline
     """
 
-    def inner_decorator(func: F) -> Type[BasePipeline]:
+    def inner_decorator(func: "F") -> Type["BasePipeline"]:
         """Inner decorator function for the creation of a ZenML pipeline.
 
         Args:
@@ -117,6 +117,8 @@ def pipeline(
         Returns:
             the class of a newly generated ZenML Pipeline
         """
+        from zenml.pipelines.base_pipeline import BasePipeline
+
         return type(  # noqa
             name if name else func.__name__,
             (BasePipeline,),
