@@ -73,9 +73,7 @@ if a `ValueError` is raised inside a step, the exception would also be of type
 
 ```python
 import logging
-
-from zenml import step
-from zenml.steps import BaseParameters, StepContext
+from zenml.steps import BaseParameters, StepContext, step
 
 # Use one or any of these in the signature
 def on_failure(context: StepContext, params: BaseParameters, exception: BaseException):

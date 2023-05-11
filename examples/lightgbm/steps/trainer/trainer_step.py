@@ -13,8 +13,7 @@
 #  permissions and limitations under the License.
 import lightgbm as lgb
 
-from zenml import step
-from zenml.steps import BaseParameters
+from zenml.steps import BaseParameters, step
 
 
 class LightGBMParameters(BaseParameters):

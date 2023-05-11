@@ -952,7 +952,7 @@ in your Python code. Let's say you have a Python file called `run.py` and
 it contains the following code:
 
 ```python
-from zenml import pipeline
+from zenml.pipelines import pipeline
 
 @pipeline
 def my_pipeline(...):

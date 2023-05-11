@@ -14,8 +14,7 @@
 import pandas as pd
 from neuralprophet import NeuralProphet
 
-from zenml import step
-from zenml.steps import Output
+from zenml.steps import Output, step
 
 DATA_LOCATION = "https://raw.githubusercontent.com/ourownstory/neuralprophet-data/main/datasets/"
 

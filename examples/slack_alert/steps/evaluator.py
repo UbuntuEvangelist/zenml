@@ -15,7 +15,7 @@
 import numpy as np
 from sklearn.base import ClassifierMixin
 
-from zenml import step
+from zenml.steps import step
 
 
 @step

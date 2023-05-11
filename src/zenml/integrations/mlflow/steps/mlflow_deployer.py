@@ -17,7 +17,6 @@ from typing import Optional, Type, cast
 
 from mlflow.tracking import MlflowClient, artifact_utils
 
-from zenml import step
 from zenml.client import Client
 from zenml.constants import (
     DEFAULT_SERVICE_START_STOP_TIMEOUT,
@@ -48,6 +47,7 @@ from zenml.steps import (
     BaseParameters,
     BaseStep,
     StepEnvironment,
+    step,
 )
 
 logger = get_logger(__name__)

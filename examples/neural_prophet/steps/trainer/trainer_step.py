@@ -14,9 +14,8 @@
 import pandas as pd
 from neuralprophet import NeuralProphet
 
-from zenml import step
 from zenml.logger import get_logger
-from zenml.steps import BaseParameters
+from zenml.steps import BaseParameters, step
 
 logger = get_logger(__name__)
 

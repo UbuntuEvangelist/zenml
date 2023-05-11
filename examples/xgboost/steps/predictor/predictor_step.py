@@ -14,7 +14,7 @@
 import numpy as np
 import xgboost as xgb
 
-from zenml import step
+from zenml.steps import step
 
 
 @step

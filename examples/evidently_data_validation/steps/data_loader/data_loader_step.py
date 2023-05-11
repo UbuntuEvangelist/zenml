@@ -15,7 +15,7 @@ import os
 import pandas as pd
 from sklearn import datasets
 
-from zenml import step
+from zenml.steps import step
 
 
 @step

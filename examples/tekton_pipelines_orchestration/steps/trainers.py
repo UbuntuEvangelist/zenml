@@ -15,8 +15,7 @@
 import numpy as np
 import tensorflow as tf
 
-from zenml import step
-from zenml.steps import BaseParameters, StepContext
+from zenml.steps import BaseParameters, StepContext, step
 
 
 class TrainerParameters(BaseParameters):

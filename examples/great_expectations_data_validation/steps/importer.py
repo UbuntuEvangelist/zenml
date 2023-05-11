@@ -18,7 +18,7 @@ import os
 import pandas as pd
 from sklearn.datasets import fetch_openml
 
-from zenml import step
+from zenml.steps import step
 
 FULL_FEATURE_NAMES = [
     name.lower()

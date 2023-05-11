@@ -17,8 +17,7 @@ import lightgbm as lgb
 import pandas as pd
 import requests
 
-from zenml import step
-from zenml.steps import Output
+from zenml.steps import Output, step
 
 TRAIN_SET_RAW = "https://raw.githubusercontent.com/microsoft/LightGBM/master/examples/regression/regression.train"
 

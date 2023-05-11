@@ -16,8 +16,7 @@
 import numpy as np
 import tensorflow as tf
 
-from zenml import step
-from zenml.steps import Output
+from zenml.steps import Output, step
 
 
 @step

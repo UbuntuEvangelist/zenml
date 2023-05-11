@@ -16,12 +16,11 @@ import mlflow
 import numpy as np
 import tensorflow as tf
 
-from zenml import step
 from zenml.client import Client
 from zenml.integrations.mlflow.experiment_trackers import (
     MLFlowExperimentTracker,
 )
-from zenml.steps import BaseParameters
+from zenml.steps import BaseParameters, step
 
 experiment_tracker = Client().active_stack.experiment_tracker
 

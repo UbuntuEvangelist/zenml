@@ -14,7 +14,7 @@
 import pandas as pd
 from neuralprophet import NeuralProphet
 
-from zenml import step
+from zenml.steps import step
 
 
 @step

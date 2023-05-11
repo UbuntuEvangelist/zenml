@@ -15,7 +15,7 @@ import pandas as pd
 from sklearn.base import ClassifierMixin
 from sklearn.ensemble import RandomForestClassifier
 
-from zenml import step
+from zenml.steps import step
 
 LABEL_COL = "target"
 

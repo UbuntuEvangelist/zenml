@@ -18,7 +18,6 @@ from uuid import uuid4
 import pytest
 
 from tests.harness.utils import clean_workspace_session
-from zenml import pipeline, step
 from zenml.artifact_stores.local_artifact_store import (
     LocalArtifactStore,
     LocalArtifactStoreConfig,
@@ -50,6 +49,7 @@ from zenml.models.pipeline_run_models import PipelineRunRequestModel
 from zenml.models.step_run_models import StepRunRequestModel
 from zenml.orchestrators.base_orchestrator import BaseOrchestratorConfig
 from zenml.orchestrators.local.local_orchestrator import LocalOrchestrator
+from zenml.pipelines import pipeline
 from zenml.post_execution.pipeline_run import PipelineRunView
 from zenml.post_execution.step import StepView
 from zenml.stack.stack import Stack
@@ -58,7 +58,7 @@ from zenml.stack.stack_component import (
     StackComponentType,
 )
 from zenml.step_operators import BaseStepOperator, BaseStepOperatorConfig
-from zenml.steps import StepContext
+from zenml.steps import StepContext, step
 
 
 @pytest.fixture(scope="module", autouse=True)

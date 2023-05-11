@@ -26,7 +26,7 @@ class UnmaterializedArtifact(ArtifactResponseModel):
     Usage example:
 
     ```python
-    from zenml import step
+    from zenml.steps import step
     from zenml.materializers import UnmaterializedArtifact
 
     @step
