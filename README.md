@@ -219,8 +219,8 @@ zenml stack register production_stack --orchestrator my_first_kubernetes --artif
 When you run a pipeline with this stack set, it will be running on your deployed
 kubeflow instance.
 
-You can also [deploy your own tooling manually]()
-or [register existing tooling]().
+You can also [deploy your own tooling manually](https://docs.zenml.io/platform-guide/set-up-your-mlops-platform/deploy-and-set-up-a-cloud-stack)
+or [register existing tooling](user-guide/starter-guide/understand-stacks#components-of-a-stack).
 
 ## 🏇 3. Create a Pipeline
 
@@ -230,25 +230,21 @@ Here's an example of a hello world ZenML pipeline in code:
 # run.py
 from zenml import pipeline, step
 
-
 @step
 def step_1() -> str:
-    """Returns the `world` substring."""
+    """Returns the `world` string."""
     return "world"
 
-
-@step
+@step(enable_cache=False)
 def step_2(input_one: str, input_two: str) -> None:
     """Combines the two strings at its input and prints them."""
-    combined_str = input_one + ' ' + input_two
+    combined_str = f"{input_one} {input_two}"
     print(combined_str)
-
 
 @pipeline
 def my_pipeline():
     output_step_one = step_1()
     step_2(input_one="hello", input_two=output_step_one)
-
 
 if __name__ == "__main__":
     my_pipeline()
