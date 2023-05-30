@@ -32,7 +32,6 @@ from uuid import UUID
 
 from pydantic import BaseModel, Field, root_validator, validator
 from pydantic.typing import get_args
-from sqlmodel import SQLModel
 
 from zenml.constants import (
     FILTERING_DATETIME_FORMAT,
@@ -45,6 +44,8 @@ from zenml.exceptions import ValidationError
 from zenml.logger import get_logger
 
 if TYPE_CHECKING:
+    from sqlmodel import SQLModel
+
     from sqlalchemy.sql.elements import BinaryExpression, BooleanClauseList
     from sqlmodel.sql.expression import Select, SelectOfScalar
 
